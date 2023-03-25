@@ -1,15 +1,21 @@
 package com.example
 
+import com.example.plugins.DatabaseFactory
+import com.example.plugins.configureMonitoring
+import com.example.plugins.configureRouting
+import com.example.plugins.configureSerialization
 import io.ktor.server.application.*
-import com.example.plugins.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 
-fun main(args: Array<String>): Unit =
-    io.ktor.server.netty.EngineMain.main(args)
 
-@Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
+fun main() {
+    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+}
+
 fun Application.module() {
+    DatabaseFactory.init()
     configureSerialization()
     configureMonitoring()
-    configureDatabases()
     configureRouting()
 }
