@@ -1,4 +1,4 @@
-# KtorDB
+# Ktor Database
 
 My application is built using several technologies to achieve its functionality. These technologies include:
 
